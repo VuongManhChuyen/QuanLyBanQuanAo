@@ -223,11 +223,14 @@
                                     <div class="product__item__text">
                                         <h6>{{$sanpham->name_product}}</h6>
                                         {{-- <a href="{{route('cart.store',$sanpham->id)}}" class="add-cart">+ Add To Cart</a> --}}
-                                       @if (Auth::user()->role_id==1)
-                                           
-                                      
+
+
+                                        @if (Auth::user() && Auth::user()->role_id==1)
                                             <button class="add-cart">+ Add To Cart</button>
-                                            @endif
+                                        @endif
+                                        @if (!Auth::user())
+                                            <button class="add-cart">+ Add To Cart</button>
+                                        @endif
                                         
                                         <div class="rating">
                                             <i class="fa fa-star-o"></i>

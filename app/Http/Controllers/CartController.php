@@ -100,10 +100,19 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        // $quantity = $cart->product_quantity;
-        // if( $quantity == 0){
-        //     $cart->delete();
-        // }
+        $product_quantity = $request->input('product_quantity');
+        $product_price = $request->input('product_price');
+        $product_id = $request->input('product_id');
+        $user_id = $request->input('user_id');
+        $cart->fill([
+            'product_quantity' => $product_quantity,
+            'product_price' => $product_price,
+            'user_id' => $user_id,
+            'product_id' => $product_id,
+        ])->save();
+        // dd($cart);
+        return redirect()->route('cart.index')
+            ->with('success', 'Cập nhật số lượng sản phẩm thành công');
     }
 
     /**

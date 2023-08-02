@@ -5,11 +5,11 @@
         $check = $check->user_id;
     @endphp
  @endforeach
-    @if (Auth::user()->id == $check)
-
-    {{-- <div class="alert alert-primary" role="alert">
+    @if (Auth::user()->id != $check && Auth::user()->role_id != 2)
+    <div class="alert alert-primary text-left" role="alert">
       Tài khoản bạn chưa có giỏ hàng, Vui lòng thêm sản phẩm vào giỏ hàng
-    </div> --}}
+    </div>
+    @else
     @if (Auth::user()->role_id == 2)
 
     <div class="alert alert-primary text-center" role="alert">
@@ -46,16 +46,17 @@
                     <table>
                       <thead>
                         <tr>
-                          <th>Product</th>
-                          <th>Quantity</th>
-                          <th>Total</th>
+                          <th>Sản Phẩm</th>
+                          <th>Số lượng</th>
+                          <th>Tổng cộng</th>
+                          <th></th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach ($cart as $cart)
                             {{-- @php $total += $cart['product_price'] * $cart['product_quantity'] @endphp --}}
-                           
+                            
                         <tr>
                           <td class="product__cart__item" >
                             <div class="product__cart__item__pic">
@@ -66,6 +67,12 @@
                               <h5>$ {{$cart->product_price}}</h5>
                             </div>
                           </td>
+                          <form action="{{ route('cart.update',$cart->id)}}"method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="product_price" value="{{$cart->product_price}}">
+                            <input type="hidden" name="product_id" value="{{$cart->product_id}}">
+                            <input type="hidden" name="user_id" value="{{$cart->user_id}}">
                           <td class="quantity__item">
                             <div class="quantity">
                               <div class="pro-qty-2">
@@ -74,10 +81,13 @@
                             </div>
                           </td>
                           <td class="cart__price">$ {{$cart->product_price*$cart->product_quantity}}</td>
+                          <td><button type="submit"><i class="fa fa-spinner"></i> Update Quantity</button></td>
+                        </form>
                           <td class="cart__close"><form action="{{route('cart.destroy',$cart->id)}}"method="POST">
                             @csrf
                               @method('DELETE')
-                            <button><i class="fa fa-close"></button></i>
+                            <button><i class="fa fa-close"></button></i></td>
+                            
                           </form>
                         </tr>
                         @endforeach
@@ -93,7 +103,8 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="continue__btn update__btn">
-                        <a href="{{ route('cart.edit',$cart->user_id)}}"><i class="fa fa-spinner"></i> Update cart</a>
+                        <a href="{{ route('cart.update',$cart->user_id)}}"><i class="fa fa-spinner"></i> Update cart</a>
+                      </form>
                       </div>
                     </div>
                   </div>
@@ -119,6 +130,11 @@
             </div>
           </section>
           @endif
+        
+            
+        
+            
+        
     @endif
    
 @endsection
