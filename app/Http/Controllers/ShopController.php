@@ -17,7 +17,18 @@ class ShopController extends Controller
         $sanpham = Product::get();
         $category = Category::get();
         $sanpham->load('Khuyenmai');
-        return view('font.shop.index',['sanpham' => $sanpham,'category' => $category]);
+                //tính tổng tiền của giỏ hàng
+                $user_id = auth()->user()->id;
+                $cartItems = Cart::with('products')->where('user_id', $user_id)->get();
+                $totalPrice = 0;
+                $totalQuantity = 0;
+        
+                foreach ($cartItems as $cartItem) {
+                    $totalPrice += $cartItem->product_quantity * $cartItem->product_price;
+                    $totalQuantity += $cartItem->product_quantity ;
+                }
+        
+        return view('font.shop.index',['sanpham' => $sanpham,'category' => $category , 'totalQuantity' => $totalQuantity,'totalPrice' => $totalPrice]);
     }
 
     /**

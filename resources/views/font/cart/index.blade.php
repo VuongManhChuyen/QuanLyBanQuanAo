@@ -7,7 +7,12 @@
  @endforeach
     @if (Auth::user()->id != $check && Auth::user()->role_id != 2)
     <div class="alert alert-primary text-left" role="alert">
-      Tài khoản bạn chưa có giỏ hàng, Vui lòng thêm sản phẩm vào giỏ hàng
+      <div class="text-left">
+      Giỏ hàng của bạn còn trống
+    </div>
+      <div class="continue__btn text-center">
+        <a href="/shop">Continue Shopping</a>
+      </div>
     </div>
     @else
     @if (Auth::user()->role_id == 2)
@@ -118,12 +123,12 @@
                     </form>
                   </div>
                   <div class="cart__total">
-                    <h6>Cart total</h6>
+                    <h6>TỔNG SỐ GIỎ HÀNG</h6>
                     <ul>
-                      <li>Subtotal <span></span></li>
-                      <li>Total <span>$ {{$totalPrice}}</span></li>
+                      <li>Tổng thanh toán <span>{{$totalQuantity}} sản phẩm</span></li>
+                      <li>Tổng cộng <span>$ {{$totalPrice}}</span></li>
                     </ul>
-                    <a href="#" class="primary-btn">Proceed to checkout</a>
+                    <a href="/checkout" class="primary-btn">MUA NGAY</a>
                   </div>
                 </div>
               </div>

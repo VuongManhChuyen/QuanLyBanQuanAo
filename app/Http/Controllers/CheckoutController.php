@@ -3,26 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\Khuyenmai;
-use App\Models\Banner;
 use App\Models\Cart;
-use Illuminate\Support\Facades\DB;
+use App\Models\OderDetail;
 use Illuminate\Support\Facades\Auth;
-class HomeController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-
     {
-        $product = Product::get();
-        $category = Category::get();
-        $khuyenmai = Khuyenmai::get();
-        $banner = Banner::get();
-        $product->load('category','khuyenmai');
+
+        $user = Auth::user();
+        $cart = $user->cart()->with('products')->get();
+        $check = Cart::get();
+        $key = 1;
         //tính tổng tiền của giỏ hàng
         $user_id = auth()->user()->id;
         $cartItems = Cart::with('products')->where('user_id', $user_id)->get();
@@ -33,22 +28,14 @@ class HomeController extends Controller
             $totalPrice += $cartItem->product_quantity * $cartItem->product_price;
             $totalQuantity += $cartItem->product_quantity ;
         }
-        return view('font.index' ,compact('product'), ['product' => $product,'category' => $category,'khuyenmai' => $khuyenmai,'banner' => $banner,
-    'totalPrice' => $totalPrice , 'totalQuantity' => $totalQuantity]);
+
+        return view('font.cart.checkout',compact('cart'),['totalPrice'=>$totalPrice,'totalQuantity'=>$totalQuantity , 'check'=>$check,
+        'key'=>$key]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function checkUserType()
-    {
-        if(Auth::user()->role_id==2){
-            return redirect()->route('adminn');
-        }
-        if(Auth::user()->role_id==1){
-            return redirect()->route('/');
-        }
-    }
     public function create()
     {
         //

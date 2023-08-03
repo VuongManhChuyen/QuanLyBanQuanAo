@@ -22,11 +22,14 @@ class CartController extends Controller
         $user_id = auth()->user()->id;
         $cartItems = Cart::with('products')->where('user_id', $user_id)->get();
         $totalPrice = 0;
+        $totalQuantity = 0;
+
         foreach ($cartItems as $cartItem) {
             $totalPrice += $cartItem->product_quantity * $cartItem->product_price;
+            $totalQuantity += $cartItem->product_quantity ;
         }
 
-        return view('font.cart.index', compact('cart'),['check' => $check,'totalPrice' => $totalPrice]);
+        return view('font.cart.index', compact('cart'),['check' => $check,'totalPrice' => $totalPrice , 'totalQuantity' => $totalQuantity]);
           
     }
     public function getTotalQuantity()

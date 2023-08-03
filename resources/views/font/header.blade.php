@@ -103,11 +103,11 @@
             <a href="#" class="search-switch"
               ><img src="font/img/icon/search.png" alt=""
             /></a>
-            <a href="#"><img src="font/img/icon/heart.png" alt="" /></a>
-            <a href="#"
-              ><img src="font/img/icon/cart.png" alt="" /> <span>0</span></a
+            {{-- <a href="#"><img src="font/img/icon/heart.png" alt="" /></a> --}}
+            <a href="/cart"
+              ><img src="font/img/icon/cart.png" alt="" /> <span>{{$totalQuantity}}</span></a
             >
-            <div class="price">$0.00</div>
+            <div class="price">${{$totalPrice}}</div>
           </div>
         </div>
       </div>
