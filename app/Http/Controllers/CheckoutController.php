@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\OderDetail;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CheckoutRequest;
+use App\Models\Order;
 class CheckoutController extends Controller
 {
     /**
@@ -44,9 +46,25 @@ class CheckoutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CheckoutRequest $request)
     {
-        //
+        $name_kh = $request->input('name_kh');
+        $diachi = $request->input('diachi');
+        $phone = $request->input('phone');
+        $email = $request->input('email');
+        $note = $request->input('note');
+        $id_user = $request->input('id_user');
+        $data = [
+            'name_kh'=>$name_kh,
+            'diachi'=>$diachi,
+            'phone'=>$phone,
+            'email'=>$email,
+            'note'=>$note,
+            'id_user'=>$id_user,
+        ];
+        Order::create($data);
+        return redirect()->route('cart.index')
+        ->with('success', 'Đặt hàng thành công !');
     }
 
     /**

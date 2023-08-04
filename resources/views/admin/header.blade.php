@@ -19,7 +19,7 @@
         <nav class="navbar bg-secondary navbar-dark">
             <a href="/adminn" class="navbar-brand mx-4 mb-3">
                 <h3 class="text-primary">
-                    <i class="fa fa-user-edit me-2"></i>DarkPan
+                    <i class="fa fa-user-edit me-2"></i>VMC Tiger
                 </h3>
             </a>
             <div class="d-flex align-items-center ms-4 mb-4">

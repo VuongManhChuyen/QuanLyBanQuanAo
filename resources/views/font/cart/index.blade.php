@@ -1,11 +1,7 @@
 @extends('font.layout')
 @section('content')
-@foreach ($check as $check)
-    @php
-        $check = $check->user_id;
-    @endphp
- @endforeach
-    @if (Auth::user()->id != $check && Auth::user()->role_id != 2)
+      
+    @if (Auth::user()->id != $check_id && Auth::user()->role_id != 2)
     <div class="alert alert-primary text-left" role="alert">
       <div class="text-left">
       Giỏ hàng của bạn còn trống

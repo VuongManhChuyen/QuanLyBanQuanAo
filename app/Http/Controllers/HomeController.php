@@ -24,6 +24,7 @@ class HomeController extends Controller
         $banner = Banner::get();
         $product->load('category','khuyenmai');
         //tính tổng tiền của giỏ hàng
+        if(Auth::user()){
         $user_id = auth()->user()->id;
         $cartItems = Cart::with('products')->where('user_id', $user_id)->get();
         $totalPrice = 0;
@@ -34,7 +35,12 @@ class HomeController extends Controller
             $totalQuantity += $cartItem->product_quantity ;
         }
         return view('font.index' ,compact('product'), ['product' => $product,'category' => $category,'khuyenmai' => $khuyenmai,'banner' => $banner,
-    'totalPrice' => $totalPrice , 'totalQuantity' => $totalQuantity]);
+        'totalPrice' => $totalPrice , 'totalQuantity' => $totalQuantity]);
+    }
+    else{
+        return view('font.index' ,compact('product'), ['product' => $product,'category' => $category,'khuyenmai' => $khuyenmai,'banner' => $banner]);
+    }
+        
     }
 
     /**

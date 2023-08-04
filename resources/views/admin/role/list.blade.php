@@ -29,9 +29,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($role as $role)
+                    @foreach ($role as $key => $role)
                     <tr>
-                        <td>{{$role->id}}</td>
+                        <td>{{$key+1}}</td>
                         <td>{{$role->name}}</td>
                         <td>{{$role->display_name}}</td>
                         <td>

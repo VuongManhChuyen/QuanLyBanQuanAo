@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
@@ -17,6 +16,10 @@ class CartController extends Controller
         $user = Auth::user();
         $cart = $user->cart()->with('products')->get();
         $check = Cart::get();
+        $check_id = '';
+        foreach ($check as $check){
+            $check_id = $check->user_id;
+        }
 
         //tính tổng tiền của giỏ hàng
         $user_id = auth()->user()->id;
@@ -29,7 +32,7 @@ class CartController extends Controller
             $totalQuantity += $cartItem->product_quantity ;
         }
 
-        return view('font.cart.index', compact('cart'),['check' => $check,'totalPrice' => $totalPrice , 'totalQuantity' => $totalQuantity]);
+        return view('font.cart.index', compact('cart'),['check_id' => $check_id,'totalPrice' => $totalPrice , 'totalQuantity' => $totalQuantity]);
           
     }
     public function getTotalQuantity()
@@ -59,11 +62,12 @@ class CartController extends Controller
             $product_id =$request->product_id;
             $product_price =$request->product_price;
             $user_id = $request->user_id;
+            $product_quantity =$request->product_quantity;
         $data=[
                     
                     'product_id' => $product_id,
                     'product_price' => $product_price,
-                    'product_quantity' => 1,
+                    'product_quantity' => $product_quantity,
                     'user_id' =>$user_id,
               
            

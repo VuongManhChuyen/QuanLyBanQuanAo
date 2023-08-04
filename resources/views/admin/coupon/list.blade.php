@@ -30,9 +30,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($coupon as $ct)
+                    @foreach ($coupon as $key =>$ct)
                     <tr>
-                        <td>{{$ct->id}}</td>
+                        <td>{{$key+1}}</td>
                         <td>{{$ct->name_coupons}}</td>
                         <td>{{$ct->type}}</td>
                         <td>{{$ct->value}}</td>

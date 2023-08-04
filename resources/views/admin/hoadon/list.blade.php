@@ -9,8 +9,7 @@
         <div
             class="d-flex align-items-center justify-content-between mb-4"
         >
-            <h6 class="mb-0">Danh Sách Phân Quyền</h6>
-            {{-- <a class="btn btn-sm btn-primary" href="{{route('role.create')}}">Add</a> --}}
+            <h6 class="mb-0">Danh Sách thông tin khách hàng</h6>
         </div>
         @if ($message = Session::get('success'))
             <div class="alert alert-success">
@@ -23,38 +22,43 @@
             >
                 <thead>
                     <tr class="text-white">
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        {{-- <th scope="col">Pass</th> --}}
-                        <th scope="col">name_role</th>
+                        <th scope="col">STT</th>
+                        <th scope="col">Họ Tên</th>
+                        <th scope="col">Số Điện Thoại</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Ghi chú</th>
+                        {{-- <th scope="col">Số lượng sản phẩm</th> --}}
                         
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($taikhoan as $key =>$taikhoan)
+                    @foreach ($order as $key => $order)
                     <tr>
                         <td>{{$key+1}}</td>
-                        <td>{{$taikhoan->name}}</td>
-                        <td>{{$taikhoan->email}}</td>
-                        {{-- <td>{{$taikhoan->password}}</td> --}}
-                        <td>{{$taikhoan->role->display_name}}</td>
+                        <td>{{$order->name_kh}}</td>
+                        <td>{{$order->phone}}</td>
+                        <td>${{$order->diachi}}</td>
+                        <td>{{$order->note}}</td>
+                        {{-- <td>{{$order->cart->product_quantity}}</td> --}}
+                      
+                        {{-- <td>{{$product->category->name_category}}</td>
+                        <td>${{$product->khuyenmai->price_khuyenmai}}</td>
+                        
                         <td>
                             
                             
-                                <form action="{{ route('taikhoan.destroy',$taikhoan->id) }}" method="POST">
+                                <form action="{{ route('product.destroy',$product->id) }}" method="POST">
                                     <a
                                 class="btn btn-sm btn-primary"
-                                href="{{ route('taikhoan.edit',$taikhoan->id) }}"
+                                href="{{ route('product.edit',$product->id) }}"
                                 >Update</a
                             >
-                        
                                 @csrf
                                 @method('DELETE')
-                                    <button class="btn btn-sm btn-primary ">Delete</button>
+                                    <button class="btn btn-sm btn-primary">Delete</button>
                                 </form>
                             
-                        </td>
+                        </td> --}}
                     </tr>   
                     @endforeach               
                 </tbody>

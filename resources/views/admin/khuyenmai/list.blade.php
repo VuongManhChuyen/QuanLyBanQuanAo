@@ -30,9 +30,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($khuyenmai as $khuyenmai)
+                    @foreach ($khuyenmai as $key => $khuyenmai)
                     <tr>
-                        <td>{{$khuyenmai->id}}</td>
+                        <td>{{$key+1}}</td>
                         
                         <td>{{$khuyenmai->price_khuyenmai}}</td>
                         <td>

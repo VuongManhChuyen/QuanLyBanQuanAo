@@ -29,9 +29,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($category as $ct)
+                    @foreach ($category as $key => $ct)
                     <tr>
-                        <td>{{$ct->id}}</td>
+                        <td>{{$key+1}}</td>
                         <td>{{$ct->name_category}}</td>
                         <td>
                             

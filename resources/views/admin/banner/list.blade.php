@@ -29,9 +29,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($banner as $banner)
+                    @foreach ($banner as $key => $banner)
                     <tr>
-                        <td>{{$banner->id}}</td>
+                        <td>{{$key+1}}</td>
                         <td>{{$banner->name}}</td>
                         <td><img src="{{asset('/storage/images/'.$banner->img)}}" alt=""style="height: 100px;width:100px;"></td>
                         <td>

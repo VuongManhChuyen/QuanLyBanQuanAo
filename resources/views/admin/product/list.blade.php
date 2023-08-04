@@ -35,9 +35,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($product as $product)
+                    @foreach ($product as $key => $product)
                     <tr>
-                        <td>{{$product->id}}</td>
+                        <td>{{$key+1}}</td>
                         <td>{{$product->name_product}}</td>
                         <td><img src="{{asset('/storage/images/'.$product->img)}}" alt=""style="height: 100px;width:100px;">
                             </td>

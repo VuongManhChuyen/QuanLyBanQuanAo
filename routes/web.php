@@ -10,6 +10,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TaiKhoanController;
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -50,10 +51,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('banner', BannerController::class);
     Route::resource('cart', CartController::class);
     Route::resource('checkout', CheckoutController::class);
+    Route::resource('hoadon', OrderController::class);
 });
 
-
-// Route::post('add-to-cart', [CartController::class, 'store'])->name('cliens.cart.add');
 Route::resource('shop', ShopController::class);
 Route::resource('taikhoan', TaiKhoanController::class);
 

@@ -41,4 +41,7 @@ class Cart extends Model
     public function users(){
         return $this->belongsTo(User::class,'user_id');
     }
+    public function order(){
+        return $this->hasMany(Order::class,'user_id');
+    }
 }

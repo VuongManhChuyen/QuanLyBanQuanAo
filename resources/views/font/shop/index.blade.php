@@ -25,10 +25,11 @@
                     <div class="col-lg-3">
                         <div class="shop__sidebar">
                             <div class="shop__sidebar__search">
-                                <form action="#">
-                                    <input type="text" placeholder="Search...">
+                                <form action="shop/search" method="get">
+                                    <input type="text" name="keyword" placeholder="Search...">
                                     <button type="submit"><span class="icon_search"></span></button>
                                 </form>
+
                             </div>
                             <div class="shop__sidebar__accordion">
                                 <div class="accordion" id="accordionExample">
@@ -209,6 +210,7 @@
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{$sanpham->id}}">
                                         <input class="hidden" type="number" name="product_price" value="{{$sanpham->khuyenmai->price_khuyenmai}}">
+                                        <input class="hidden" type="number" name="product_quantity" value="1">
                                         @if (Auth::user())
                                         <input class="hidden" type="text" name="user_id" value="{{Auth::user()->id}}">
                                         @endif
@@ -217,7 +219,7 @@
                                             <li><a href="#"><img src="font/img/icon/heart.png" alt=""></a></li>
                                             <li><a href="#"><img src="font/img/icon/compare.png" alt=""> <span>Compare</span></a>
                                             </li>
-                                            <li><a href="#"><img src="font/img/icon/search.png" alt=""></a></li>
+                                            <li><a href="{{ route('shop.show', $sanpham->id) }}"><img src="font/img/icon/search.png" alt=""></a></li>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
@@ -240,16 +242,8 @@
                                             <i class="fa fa-star-o"></i>
                                         </div>
                                         <h5><strike>${{$sanpham->price}}</strike>  $ {{$sanpham->khuyenmai->price_khuyenmai}}</h5>
-                                        <div class="product__color__select">
-                                            <label for="pc-4">
-                                                <input type="radio" id="pc-4">
-                                            </label>
-                                            <label class="active black" for="pc-5">
-                                                <input type="radio" id="pc-5">
-                                            </label>
-                                            <label class="grey" for="pc-6">
-                                                <input type="radio" id="pc-6">
-                                            </label>
+                                        <div class="">
+                                            <a href="{{route('shop.show',$sanpham->id)}}">Chi tiết</a>
                                         </div>
                                     </div>
                                 </form>
